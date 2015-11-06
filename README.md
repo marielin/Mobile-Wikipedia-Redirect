@@ -1,2 +1,4 @@
 # Mobile-Wikipedia-Redirect
-A simple Safari extension to re-direct desktop Wikipedia pages to the mobile Wikipedia version. 
+A simple Safari extension to re-direct desktop Wikipedia to mobile Wikipedia for greater readability. 
+
+Currently only works with English Wikipedia (en.wikipedia.org). 
