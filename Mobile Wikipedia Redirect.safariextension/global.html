@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<title>URL Rewrite extension</title>
+<script>
+	safari.application.addEventListener('beforeNavigate', setRedirect, true);
+	safari.application.addEventListener('navigate', redirect, true);
+
+	var url = "";
+	var shouldRedirect = false;
+
+	function setRedirect(event) {
+		// alert("url: \n" + event.url + "\n\ntarget url: " + event.target.url);
+		if (event.url.indexOf("https://en.wikipedia.org") == 0) {
+			url = "https://en.m.wikipedia.org" + event.url.slice(24);
+			shouldRedirect = true;
+		} else {
+			url = "";
+			shouldRedirect = false;
+		}
+	}
+
+	function redirect(event) {
+		if (shouldRedirect) {
+			event.target.url = url;
+		}
+	}
+</script>
+
+<!-- This kind of works, but since beforeNavigate events are triggered during search bar autocomplete, this can cause strange behavior while using the search bar.  -->
+<!-- <script>
+	safari.application.addEventListener('beforeNavigate', redirect, true);
+	function redirect(event) {
+		if (event.url.indexOf("https://en.wikipedia.org") == 0) {
+			var newUrl = "https://en.m.wikipedia.org" + event.url.slice(24);
+
+			event.preventDefault();
+			event.target.url = newUrl;
+		}
+	}
+</script> -->
